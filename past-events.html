@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Past Events — Founders Without Borders</title>
+<link rel="icon" type="image/png" href="images/fwb-logo-transparent.png" />
+<link rel="stylesheet" href="css/colors_and_type.css" />
+<link rel="stylesheet" href="css/site.css" />
+<link rel="stylesheet" href="css/brand-chrome.css" />
+<style id="page">
+  .sec { padding-top: 96px; padding-bottom: 96px; }
+
+  /* hero */
+  .pe-hero { padding-top: 64px; padding-bottom: 8px; }
+  .pe-hero .eyebrow { display: block; margin-bottom: 16px; }
+  .pe-hero h1 { font-family: var(--font-display); font-size: 84px; line-height: 0.98; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  .pe-hero h1 em { font-style: italic; }
+  .pe-lead { font-family: var(--font-serif); font-size: 21px; line-height: 1.55; color: var(--ink-2); max-width: 56ch; margin: 24px 0 0; }
+  .pe-meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.02em; color: var(--ink-3); }
+  .pe-meta span { display: inline-flex; align-items: center; }
+  .pe-meta span + span::before { content: "·"; margin-right: 14px; color: var(--ink-line-2); }
+
+  /* feature image */
+  .pe-feature { margin-top: 56px; }
+  .pe-feature figure { margin: 0; }
+  .pe-feature .frame { border: 1px solid var(--ink-line); overflow: hidden; background: var(--paper-3); aspect-ratio: 16 / 9; }
+  .pe-feature .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pe-feature figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.02em; margin-top: 12px; }
+
+  /* recap + article */
+  .recap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start; }
+  .recap-aside .eyebrow { display: block; margin-bottom: 18px; }
+  .recap-aside h2 { font-family: var(--font-display); font-size: 40px; line-height: 1.05; margin: 0; }
+  .recap-aside h2 em { font-style: italic; }
+  .recap-col p { font-family: var(--font-serif); font-size: 18px; line-height: 1.62; color: var(--ink-2); margin: 0 0 20px; max-width: 60ch; }
+  .recap-col p:first-child::first-letter { font-family: var(--font-display); font-size: 3.6em; line-height: 0.72; float: left; margin: 6px 10px 0 0; color: var(--terracotta); }
+  .article-soon { margin-top: 12px; border: 1px dashed var(--ink-line-2); border-radius: var(--r-lg); background: var(--paper-white); padding: 30px 32px; }
+  .article-soon .tag { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terracotta); }
+  .article-soon p { font-family: var(--font-serif); font-size: 17px; line-height: 1.55; color: var(--ink-2); margin: 10px 0 0; }
+
+  /* network */
+  .connections { background: #EFF3F7; }
+  .connections .sec-head { max-width: 900px; margin-bottom: 48px; }
+  .connections .sec-head .eyebrow { display: block; margin-bottom: 14px; }
+  .connections .sec-head h2 { font-family: var(--font-display); font-size: 42px; line-height: 1.08; margin: 0; }
+  .connections .sec-head h2 em { font-style: italic; }
+  .logo-wall { margin: 0; }
+  .logo-wall .frame { background: #fff; border: 1px solid var(--ink-line); border-radius: var(--r-lg); box-shadow: var(--shadow-2); padding: 40px 44px; }
+  .logo-wall .frame img { display: block; width: 100%; height: auto; }
+  .network-list { list-style: none; padding: 0; margin: 40px 0 0; columns: 3; column-gap: 48px; }
+  .network-list li { font-family: var(--font-serif); font-size: 17px; line-height: 1.5; color: var(--ink-2); padding: 9px 0; border-bottom: 1px solid var(--ink-line); break-inside: avoid; }
+
+  /* cta */
+  .pe-cta { text-align: center; padding-top: 100px; padding-bottom: 100px; }
+  .pe-cta .eyebrow { display: block; margin-bottom: 14px; }
+  .pe-cta h2 { font-family: var(--font-display); font-size: 60px; line-height: 1.0; margin: 0 auto; max-width: 18ch; }
+  .pe-cta h2 em { font-style: italic; }
+  .pe-cta .row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+  @media (max-width: 1100px) {
+    .recap { grid-template-columns: 1fr; gap: 36px; }
+    .network-list { columns: 2; }
+  }
+  @media (max-width: 760px) {
+    .sec { padding-top: 64px; padding-bottom: 64px; }
+    .pe-hero h1 { font-size: 48px; }
+    .pe-lead { font-size: 18px; }
+    .recap-aside h2, .connections .sec-head h2 { font-size: 30px; }
+    .logo-wall .frame { padding: 22px 20px; }
+    .network-list { columns: 1; }
+    .pe-cta h2 { font-size: 36px; }
+  }
+
+  /* ===== consistency pass: match homepage type ===== */
+  main p, main li, main dd, main blockquote, main figcaption { font-family: var(--font-sans) !important; font-style: normal !important; }
+  main h4 { font-family: var(--font-sans) !important; font-weight: 600 !important; font-style: normal !important; }
+  main em { font-style: normal !important; }
+</style>
+<link rel="stylesheet" href="css/fwb-site.css" />
+</head>
+<body>
+
+<!-- ============ TOP NAV ============ -->
+<a target="_blank" rel="noopener" class="topbar" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Have questions? <span>Book a free 15-minute call</span> with our team →</a>
+
+<!-- ============ TOP NAV ============ -->
+<header class="nav">
+  <div class="nav-inner nav-split">
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="thesis.html">Our Thesis</a>
+      <div class="nav-drop">
+        <button class="nav-link nav-drop-btn" type="button" aria-expanded="false">Program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+        <div class="mega mega-simple">
+          <a href="cape-town.html">Cape Town Immersion</a>
+          <a href="index.html#internship">Global Opportunities</a>
+          <a href="mentors.html">Entrepreneurship Track</a>
+          <a href="internship-track.html">Internship Track</a>
+        </div>
+      </div>
+      <a class="nav-link" href="partners.html">Partners</a>
+      <a class="nav-link" href="https://substack.com/@founderswithoutborders" target="_blank" rel="noopener">Blog</a>
+      <a class="nav-link" href="funding.html">Get Funding</a>
+      <a target="_blank" rel="noopener" class="btn btn-primary btn-sm mobile-only" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+    </div>
+    <a class="nav-center" href="index.html" aria-label="Founders Without Borders home">
+      <img src="images/fwb-logo-transparent.png" alt="" />
+      <span>Founders Without Borders</span>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-pill join" href="https://mailchi.mp/founderswoborders/1s9vzlf3jj" target="_blank" rel="noopener">Join us</a>
+      <a target="_blank" rel="noopener" class="nav-pill apply" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="pe-hero container">
+    <span class="eyebrow">Past events</span>
+    <h1>Cape Town <em>2026</em></h1>
+    <p class="pe-lead">Our inaugural cohort spent a season inside one of Africa's most dynamic entrepreneurial ecosystems, working alongside the founders and organizations solving their communities' most pressing problems.</p>
+    <div class="pe-meta">
+      <span>Cape Town, South Africa</span>
+      <span>Dec 30, 2025 – Jan 11, 2026</span>
+      <span>Inaugural cohort</span>
+    </div>
+  </section>
+
+  <!-- ============ FEATURE IMAGE ============ -->
+  <section class="pe-feature container">
+    <figure>
+      <div class="frame"><img src="images/photos/cpt-picnic.webp" alt="The Founders Without Borders cohort sharing a meal together in Cape Town" /></div>
+      <figcaption>↑ The inaugural cohort, Cape Town · January 2026</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ RECAP + ARTICLE ============ -->
+  <section class="sec container">
+    <div class="recap">
+      <div class="recap-aside">
+        <span class="eyebrow">The story</span>
+        <h2>A season that <em>started it all</em></h2>
+      </div>
+      <div class="recap-col">
+        <p>On the Vergelegen Wine Estate, the student founders spent a Friday in conversation with leaders shaping Africa's entrepreneurial future. Hosting the group was Dee Moskoff of iKapa, an internship experience connecting students around the world to South African culture and industry, from education to entrepreneurship.</p>
+        <p>They were joined by members of the Harambean Entrepreneur Alliance, a community of African innovators co-creating Africa's future through shared resources and economic opportunity. Jo Griffiths, co-founder of the Global Innovation Initiative Group (GIIG), shared her journey as a global thinker and impact investor. "If you don't have visibility on the continent, how do you tell your story?" she said.</p>
+        <p>Bridget Fury, a social impact strategist with 25 years in philanthropy and Founding Director of the Oppenheimer Generations Foundation, also attended, alongside Thandwefike Radebe, co-founder and Chief Strategic Officer of Qwili, a technology company building a digital sales ecosystem for unbanked merchants. His story reminded the founders of the power of intentional impact.</p>
+        <p>The conversation continued over a forest lunch with Russel Luck, founder of swiftVEE, a SaaS platform connecting African farmers to global markets through digital livestock auctions. The day closed with a Harambean tradition of sharing roses, buds, and thorns from each person's life, a moment of intimate introspection. Lunch with the Harambean Alliance was more than breaking bread. It was a shared commitment toward social entrepreneurship.</p>
+        <a class="btn btn-primary" href="https://www.linkedin.com/company/founderswoborders/" target="_blank" rel="noopener">Read the full story on LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NETWORK ============ -->
+  <section class="sec connections" id="network">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">The network</span>
+        <h2>Now part of our <em>network</em></h2>
+      </div>
+      <figure class="logo-wall">
+        <div class="frame"><img src="images/network-logos.png" alt="Logos of the founders, social enterprises, and partner organizations in the Founders Without Borders network" /></div>
+      </figure>
+      <ul class="network-list">
+        <li>Spero Optima · Oppenheimer</li>
+        <li>iKapa Impact</li>
+        <li>Peninsula School Feeding Association</li>
+        <li>The Smallest Ones, Popina Khumanda</li>
+        <li>Global Innovation Initiative Group</li>
+        <li>OneThread</li>
+        <li>SwiftVee</li>
+        <li>Mosebe Enterprise</li>
+        <li>AnchorTech Academy</li>
+        <li>Newform</li>
+        <li>Seven Colours Eatery</li>
+        <li>Qwili</li>
+        <li>CleanClick</li>
+        <li>MyCommunity</li>
+        <li>AMAzink</li>
+        <li>Township &amp; Village Experience</li>
+        <li>Justice Desk Africa</li>
+        <li>Harambeans</li>
+        <li>Impact Hub</li>
+        <li>SOZO Foundation</li>
+        <li>Curiocity</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="pe-cta container">
+    <span class="eyebrow">What's next</span>
+    <h2>Be part of the next <em>cohort</em></h2>
+    <div class="row">
+      <a class="btn btn-primary" href="cape-town.html#booking">See the Cape Town program</a>
+      <a class="btn btn-ghost" href="https://mailchi.mp/founderswoborders/1s9vzlf3jj" target="_blank" rel="noopener">Join our community</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ SAVE YOUR SPOT ============ -->
+<section class="visit">
+  <div class="visit-inner">
+    <h2 class="visit-title">Join us in Cape Town</h2>
+    <div class="visit-grid">
+      <div class="visit-media"><video src="videos/cape-town-hero.mp4" poster="images/photos/cape-town-aerial.png" autoplay muted loop playsinline></video><button class="vm-sound" type="button" aria-label="Turn sound on" onclick="var v=this.previousElementSibling;v.muted=!v.muted;if(!v.muted){v.volume=1;v.play();}this.classList.toggle('on',!v.muted);this.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');this.querySelector('span').textContent=v.muted?'Sound on':'Sound off';"><svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg><svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg><span>Sound on</span></button></div>
+      <div class="visit-copy">
+        <span class="visit-kicker">Limited spots available</span>
+        <h3>Let's save your spot</h3>
+        <p>We connect founders to global opportunities. Whether you're ready to apply or still have questions, we're here to help.</p>
+        <div class="visit-actions">
+          <a class="visit-btn solid" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+          <a target="_blank" rel="noopener" class="visit-btn" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a free 15-minute call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="footer-logo" href="index.html" aria-label="Founders Without Borders home"><span class="fl-words"><span class="fl-1">Founders</span><span class="fl-2">Without</span><span class="fl-3">Borders</span></span><img src="images/fwb-logo-transparent.png" alt="" /></a>
+      <div class="footer-lede">Future-proof the opportunities of tomorrow<br />by connecting founders of today</div>
+      <form class="footer-subscribe" id="subscribeForm">
+        <label for="subEmail">Subscribe for updates</label>
+        <div class="sub-row">
+          <input type="email" id="subEmail" name="email" placeholder="you@email.com" required />
+          <button type="submit"><i data-lucide="arrow-right"></i></button>
+        </div>
+        <p class="sub-note" id="subNote" hidden>Thanks, we'll be in touch.</p>
+      </form>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>Instagram</a>
+        <a href="https://www.linkedin.com/company/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h6>Explore</h6>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="cape-town.html">Cape Town</a>
+      <a href="past-events.html">Past events</a>
+    </div>
+    <div>
+      <h6>Program</h6>
+      <a href="cape-town.html#overview">Why this program</a>
+      <a href="cape-town.html#experience">The experience</a>
+      <a href="cape-town.html#booking">Pricing &amp; dates</a>
+    </div>
+    <div>
+      <h6>Apply</h6>
+      <a href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+      <a href="mailto:laurenne@founderswoborders.com">laurenne@founderswoborders.com</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Founders Without Borders. All rights reserved.</span>
+    <span>Limited spots available · Applications are open</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle'), l=document.querySelector('.nav-links');
+  if(t&&l){ t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open?'true':'false');
+  }); }
+  var sf=document.getElementById('subscribeForm');
+  if(sf){ sf.addEventListener('submit',function(e){
+    e.preventDefault();
+    window.open('https://mailchi.mp/founderswoborders/1s9vzlf3jj','_blank','noopener');
+    document.getElementById('subNote').hidden=false;
+    sf.querySelector('.sub-row').style.display='none';
+  }); }
+})();
+</script>
+<script>
+(function(){
+  var nd=document.querySelector('.nav-drop'), nb=nd&&nd.querySelector('.nav-drop-btn');
+  if(nb){ nb.addEventListener('click',function(e){ e.stopPropagation(); var o=nd.classList.toggle('open'); nb.setAttribute('aria-expanded',o?'true':'false'); });
+    document.addEventListener('click',function(e){ if(!nd.contains(e.target)){ nd.classList.remove('open'); nb.setAttribute('aria-expanded','false'); } });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ nd.classList.remove('open'); } }); }
+})();
+</script>
+</body>
+</html>

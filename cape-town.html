@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cape Town Immersion — Founders Without Borders</title>
+<link rel="icon" type="image/png" href="images/fwb-logo-transparent.png" />
+<link rel="stylesheet" href="css/colors_and_type.css" />
+<link rel="stylesheet" href="css/site.css" />
+<style id="page">
+  html { scroll-behavior: smooth; }
+  body { background: #ffffff; }
+  .nav-inner { max-width: 1240px; position: relative; }
+  .container { padding-left: 32px; padding-right: 32px; }
+
+  /* mobile nav toggle */
+  .nav-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--ink-line); border-radius: var(--r-md); background: var(--paper-white); color: var(--ink); cursor: pointer; flex: 0 0 auto; }
+  .nav-toggle svg { width: 22px; height: 22px; display: block; }
+  .nav-toggle .x { display: none; }
+  .nav-toggle[aria-expanded="true"] .menu { display: none; }
+  .nav-toggle[aria-expanded="true"] .x { display: block; }
+
+  /* real-photo container */
+  .shot { position: relative; overflow: hidden; background: var(--paper-3); display: block; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot .cap {
+    position: absolute; left: 0; bottom: 0; z-index: 2;
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em;
+    color: var(--paper-white); background: linear-gradient(transparent, rgba(28,24,20,0.7));
+    padding: 28px 12px 10px; width: 100%; box-sizing: border-box;
+  }
+
+  /* brand mark */
+  .brand-mark { height: 30px; width: auto; mix-blend-mode: multiply; }
+
+  /* ===== HERO ===== */
+  .hero { padding-top: 52px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; }
+  .hero h1 { font-size: 80px; line-height: 1.1; letter-spacing: -0.028em; margin-top: 18px; padding-bottom: 8px; }
+  .hero h1 em { font-style: italic; }
+  .hero .lead { margin-top: 60px; max-width: 42ch; font-size: 20px; }
+  .hero-cta { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-top: 24px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.03em; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--terracotta); display: inline-block; }
+
+  .hero-feature { border: 1px solid var(--ink-line); background: var(--paper-3); }
+  .hero-feature img { width: 100%; height: auto; display: block; }
+  .photo-credit { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-top: 8px; letter-spacing: 0.03em; }
+
+  /* ===== EF-style booking block ===== */
+  .book-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; }
+  .worry-card { background: var(--ochre); border-radius: 14px; padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; gap: 28px; box-shadow: var(--shadow-2); }
+  .worry-card .wc-body h4 { font-family: var(--font-display); font-size: 30px; color: var(--ink); margin-bottom: 8px; }
+  .worry-card .wc-body p { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; color: var(--moss-2); max-width: 42ch; }
+  .worry-card .wc-amt { text-align: right; flex-shrink: 0; }
+  .worry-card .wc-amt .n { font-family: var(--font-display); font-size: 56px; line-height: 0.9; color: var(--ink); }
+  .worry-card .wc-amt .l { font-family: var(--font-mono); font-size: 11px; color: var(--moss-2); letter-spacing: 0.04em; margin-top: 6px; }
+  .book-why { margin-top: 44px; }
+  .book-why h3 { font-family: var(--font-display); font-size: 40px; margin-bottom: 16px; }
+  .book-why h3 em { font-style: italic; }
+  .book-why > p { font-family: var(--font-serif); font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 52ch; }
+  .book-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
+  .book-cols h5 { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; }
+  .book-cols ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+  .book-cols li { display: flex; gap: 11px; font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+  .book-cols li svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; }
+  .book-cols .get svg { stroke: var(--terracotta); }
+  .book-cols .pic svg { stroke: var(--moss-3); }
+
+  /* cohort selector */
+  .cohort-card { border: 1px solid var(--ink-line); border-radius: 14px; background: var(--paper-white); box-shadow: var(--shadow-2); position: sticky; top: 130px; overflow: hidden; }
+  .cohort-head { padding: 24px 28px; border-bottom: 1px solid var(--ink-line); }
+  .cohort-head .ttl { font-family: var(--font-display); font-size: 26px; color: var(--ink); }
+  .cohort-head .sub { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.03em; margin-top: 6px; }
+  .cohort-yeartag { padding: 12px 28px; background: var(--paper-2); font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-4); }
+  .cohort-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 28px; border-bottom: 1px solid var(--ink-line); }
+  .cohort-row:last-of-type { border-bottom: none; }
+  .cohort-row .cr-date { font-family: var(--font-sans); font-weight: 600; font-size: 16px; color: var(--ink); }
+  .cohort-row .cr-type { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.03em; margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+  .cohort-row .cr-type svg { width: 13px; height: 13px; stroke: var(--moss-3); }
+  .cohort-row .cr-price { font-family: var(--font-display); font-size: 28px; color: var(--ink); white-space: nowrap; }
+  .cohort-row.featured { background: color-mix(in srgb, var(--ochre) 14%, var(--paper-white)); }
+  .cohort-row .cr-badge { display: inline-block; font-family: var(--font-sans); font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin-top: 6px; }
+  .cohort-foot { padding: 22px 28px; }
+  .cohort-foot .btn { width: 100%; justify-content: center; }
+  .cohort-foot .fine { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.02em; line-height: 1.5; margin-top: 14px; text-align: center; }
+
+  /* ===== quick facts ===== */
+  .facts { margin-top: 52px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink-line); display: grid; grid-template-columns: repeat(5, 1fr); }
+  .fact { padding: 22px 24px 24px 0; border-right: 1px solid var(--ink-line); }
+  .fact:last-child { border-right: none; }
+  .fact .k { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .fact .k svg { width: 14px; height: 14px; stroke: var(--ink-3); }
+  .fact .v { font-family: var(--font-display); font-size: 25px; line-height: 1.05; color: var(--ink); }
+  .fact .v small { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.02em; margin-top: 5px; }
+
+  /* ===== sub-nav ===== */
+  .subnav { position: sticky; top: 92px; z-index: 40; background: rgba(244, 238, 226, 0.9); backdrop-filter: saturate(1.2) blur(20px); -webkit-backdrop-filter: saturate(1.2) blur(20px); border-bottom: 1px solid var(--ink-line); margin-top: 8px; }
+  .subnav-inner { max-width: 1240px; margin: 0 auto; padding: 0 32px; display: flex; gap: 4px; align-items: center; overflow-x: auto; }
+  .subnav a { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--ink-3); text-decoration: none; padding: 15px 14px; white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+  .subnav a:hover { color: var(--ink); }
+  .subnav a.active { color: var(--ink); border-bottom-color: var(--terracotta); }
+
+  /* ===== sections ===== */
+  section[id] { scroll-margin-top: 124px; }
+  .sec { padding-top: 88px; padding-bottom: 88px; }
+  .sec-head { margin-bottom: 48px; }
+  .sec-head h2 { font-size: 52px; margin-top: 12px; }
+  .sec-head h2 em { font-style: italic; }
+
+  /* ===== overview ===== */
+  .why-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 72px; align-items: start; }
+  .why-body .editorial { max-width: 46ch; }
+  .why-body .editorial + .editorial { margin-top: 22px; }
+  .who-block { margin-top: 36px; padding-top: 30px; border-top: 1px solid var(--ink-line); }
+  .who-block .eyebrow { margin-bottom: 12px; }
+  .who-block p { font-family: var(--font-serif); font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 46ch; }
+  .incl-card { background: var(--paper-white); border: 1px solid var(--ink-line); border-radius: 14px; box-shadow: var(--shadow-2); padding: 32px 34px; }
+  .incl-card h5 { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 20px; }
+  .incl-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 15px; }
+  .incl-list li { display: flex; gap: 12px; font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+  .incl-list li svg { width: 18px; height: 18px; stroke: var(--terracotta); flex-shrink: 0; margin-top: 2px; }
+  .incl-not { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--ink-line); font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em; }
+
+  /* ===== experience pillars ===== */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .pillar { background: var(--paper-white); border: 1px solid var(--ink-line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-2); display: flex; flex-direction: column; }
+  .pillar .shot { height: 220px; }
+  .pillar .p-body { padding: 26px 28px 30px; }
+  .pillar .p-tag { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terracotta); }
+  .pillar h3 { font-family: var(--font-display); font-size: 30px; line-height: 1.08; margin: 8px 0 12px; }
+  .pillar p { font-family: var(--font-serif); font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
+
+  /* ===== itinerary ===== */
+  .day { display: grid; grid-template-columns: 132px 1fr 280px; gap: 40px; padding: 40px 0; border-top: 1px solid var(--ink-line); align-items: start; }
+  .day:first-of-type { border-top: 1px solid var(--ink); }
+  .day-num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+  .day-num b { display: block; font-family: var(--font-display); font-size: 48px; font-weight: 400; line-height: 0.9; color: var(--ink); letter-spacing: -0.02em; margin-top: 6px; }
+  .day-body h3 { font-size: 30px; margin-bottom: 13px; }
+  .day-body h3 em { font-style: italic; }
+  .day-body > p { font-family: var(--font-serif); font-size: 16.5px; line-height: 1.6; color: var(--ink-2); }
+  .day-tag { display: inline-block; margin-bottom: 13px; font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; }
+  .day-high { margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .day-high li { display: flex; gap: 11px; font-family: var(--font-sans); font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .day-high svg { width: 16px; height: 16px; stroke: var(--moss-3); flex-shrink: 0; margin-top: 2px; }
+  .day-high .lbl { font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 2px; }
+  .day .shot { height: 200px; }
+  .itin-note { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em; margin-top: 28px; }
+
+  /* ===== add-ons ===== */
+  .addons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .addon { border: 1px solid var(--ink-line); border-radius: 14px; padding: 26px 28px; background: var(--paper-white); box-shadow: var(--shadow-1); }
+  .addon .ic { width: 38px; height: 38px; border-radius: 999px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .addon .ic svg { width: 19px; height: 19px; stroke: var(--moss); }
+  .addon h4 { font-family: var(--font-serif); font-size: 21px; margin-bottom: 8px; color: var(--ink); }
+  .addon p { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; color: var(--ink-3); }
+
+  /* ===== focus tags ===== */
+  .focus { background: var(--paper-2); }
+  .focus-tags { display: flex; flex-wrap: wrap; gap: 12px; max-width: 900px; }
+  .focus-tags span { font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: var(--ink); background: var(--paper-white); border: 1px solid var(--ink-line-2); border-radius: 999px; padding: 11px 20px; }
+
+  /* ===== gallery ===== */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; }
+  .gallery-grid .shot:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-grid .shot:nth-child(6) { grid-column: span 2; }
+
+  /* ===== reviews ===== */
+  .reviews { background: var(--ink); color: var(--paper-white); }
+  .reviews .sec-head h2 { color: var(--paper-white); }
+  .reviews .eyebrow { color: var(--ochre); }
+  .rev-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 40px; }
+  .rev-card { border-top: 1px solid rgba(244,238,226,0.22); padding-top: 24px; }
+  .stars { display: inline-flex; gap: 1px; color: var(--ochre); }
+  .stars svg { width: 14px; height: 14px; fill: var(--ochre); stroke: var(--ochre); }
+  .rev-quote { font-family: var(--font-serif); font-size: 19px; font-style: italic; line-height: 1.5; color: var(--paper-white); margin: 14px 0 16px; }
+  .rev-by { font-family: var(--font-mono); font-size: 11.5px; color: #C9B89B; letter-spacing: 0.03em; }
+
+  /* reviews carousel */
+  .tst-stage { position: relative; min-height: 240px; }
+  .tst-slide { margin: 0; border-left: 3px solid var(--ochre); padding-left: 40px; max-width: 1000px; display: none; }
+  .tst-slide.is-active { display: block; animation: tstfade 0.42s var(--ease-out); }
+  @keyframes tstfade { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+  .tst-slide blockquote { font-family: var(--font-serif); font-style: italic; font-size: 29px; line-height: 1.46; color: var(--paper-white); margin: 0 0 24px; }
+  .tst-slide figcaption { font-family: var(--font-mono); font-size: 12px; color: #C9D6E2; letter-spacing: 0.03em; }
+  .tst-nav { display: flex; align-items: center; gap: 22px; margin-top: 40px; }
+  .tst-arrow { width: 48px; height: 48px; border-radius: var(--r-circle); border: 1px solid rgba(255,255,255,0.35); background: transparent; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--paper-white); transition: background var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out); }
+  .tst-arrow:hover { background: var(--paper-white); color: #0064F0; }
+  .tst-arrow svg { width: 20px; height: 20px; }
+  .tst-count { font-family: var(--font-mono); font-size: 14px; color: #C9D6E2; letter-spacing: 0.04em; }
+  @media (max-width: 640px) {
+    .tst-slide blockquote { font-size: 22px; }
+    .tst-slide { padding-left: 24px; }
+  }
+
+  /* ===== pricing ===== */
+  .price-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
+  .price-lead .big { font-family: var(--font-display); font-size: 88px; line-height: 0.9; color: var(--ink); letter-spacing: -0.02em; }
+  .price-lead .sub { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); letter-spacing: 0.03em; margin-top: 12px; }
+  .price-lead .note { font-family: var(--font-serif); font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 22px 0; max-width: 36ch; }
+  .price-lead .not-incl { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.02em; border-top: 1px solid var(--ink-line); padding-top: 16px; }
+  .plans { display: flex; flex-direction: column; gap: 14px; }
+  .plan { display: flex; justify-content: space-between; align-items: center; gap: 20px; background: var(--paper-white); border: 1px solid var(--ink-line); border-radius: 14px; padding: 22px 26px; box-shadow: var(--shadow-1); }
+  .plan.feature { border-color: var(--terracotta); box-shadow: var(--shadow-3); }
+  .plan .pl-name { font-family: var(--font-sans); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .plan .pl-name small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+  .plan .pl-amt { font-family: var(--font-display); font-size: 30px; color: var(--ink); white-space: nowrap; }
+  .plan .pl-amt small { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+  .plan-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 6px; padding-top: 16px; }
+  .plan-foot .fine { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em; line-height: 1.5; }
+
+  /* ===== faq ===== */
+  .faq-wrap { max-width: 820px; }
+  .faq-item { border-top: 1px solid var(--ink-line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--ink-line); }
+  .faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0; text-align: left; font-family: var(--font-serif); font-size: 23px; color: var(--ink); line-height: 1.3; }
+  .faq-q svg { width: 22px; height: 22px; stroke: var(--ink-3); flex-shrink: 0; transition: transform var(--dur-mid) var(--ease-out); }
+  .faq-item.open .faq-q svg { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height var(--dur-slow) var(--ease-in-out); }
+  .faq-a-inner { padding: 0 0 28px; font-family: var(--font-serif); font-size: 16.5px; line-height: 1.65; color: var(--ink-2); max-width: 66ch; }
+
+  /* ===== final CTA ===== */
+  .apply-cta { text-align: center; padding-top: 100px; padding-bottom: 100px; }
+  .apply-cta h2 { font-size: 70px; line-height: 1.0; margin: 18px auto 0; max-width: 18ch; }
+  .apply-cta h2 em { font-style: italic; }
+  .apply-cta .hero-cta { justify-content: center; }
+  .apply-cta .contact { margin-top: 24px; font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); letter-spacing: 0.02em; }
+  .apply-cta .contact a { color: var(--rust); }
+
+  /* ===== overrides: white nav, black footer, yellow reserve, no orange ===== */
+  .nav { background: #ffffff; }
+  .footer { background: #0064F0; }
+  .cohort-row.featured { background: #EAF2FE; box-shadow: inset 3px 0 0 #0064F0; }
+  .worry-card { background: #EAF2FE; border: 1px solid rgba(0,100,240,0.18); }
+  .worry-card .wc-body p, .worry-card .wc-amt .l { color: var(--ink-3); }
+  .btn-primary { background: #0064F0; color: #fff; box-shadow: var(--shadow-2); }
+  .btn-primary:hover { background: #0050C4; box-shadow: var(--shadow-3); }
+  .cohort-foot .btn { box-sizing: border-box; }
+  /* sweep: retire leftover ochre / moss / tan */
+  .day-tag.tag-moss, .day-tag.tag-ochre { background: #EAF2FE !important; color: #0064F0 !important; }
+  .day-tag.tag-ochre { background: #fff !important; border: 1px solid rgba(0,100,240,0.3) !important; }
+  .reviews .eyebrow { color: rgba(255,255,255,0.8) !important; }
+  .tst-slide { border-left-color: rgba(255,255,255,0.55) !important; }
+  .shot { background: #EFF3F7 !important; }
+  main a:not(.btn):not(.fd-link) { color: var(--ink); }
+
+  .visit-kicker { background: #EAF2FE !important; color: #0064F0 !important; }
+  /* booking actions → yellow (already: worry-card, featured cohort row) */
+  /* info / experience containers → soft blue */
+  .incl-card { background: #EFF3F7; }
+  .pillar { background: #EFF3F7; }
+  .addon { background: #EFF3F7; }
+  .addon .ic { background: #ffffff; }
+  /* vertical-video add-on cards */
+  .addon-video { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .av-media { aspect-ratio: 9 / 16; background: var(--ink); overflow: hidden; }
+  .av-media video { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+  .av-body { padding: 22px 24px 26px; }
+  .av-body h4 { font-family: var(--font-serif); font-size: 21px; margin-bottom: 8px; color: var(--ink); }
+  .av-body p { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; color: var(--ink-3); }
+  .focus { background: #EFF3F7; }
+  .focus-tags span { background: #ffffff; }
+  /* reviews → deep brand blue with white text */
+  .reviews { background: #0064F0; }
+
+  /* remaining cream/tan surfaces → blue tint */
+  .cohort-card { background: #EFF3F7; }
+  .cohort-yeartag { background: #DCE6EF; color: var(--ink-3); }
+  .subnav { background: rgba(239,243,247,0.9); }
+  .dot { background: var(--ink); }
+  .cohort-row .cr-badge { color: var(--ink); }
+  .cohort-row .cr-badge.perk { background: #EFF3F7; color: #0064F0; padding: 3px 9px; border-radius: var(--r-pill); letter-spacing: 0.08em; }
+  .pillar .p-tag { color: var(--ink); }
+  .incl-list li svg { stroke: var(--ink); }
+  .book-cols .get svg { stroke: var(--ink); }
+  .apply-cta .contact a { color: var(--ink); }
+  .has-dropcap::first-letter { color: var(--ink); }
+  .subnav a.active { border-bottom-color: var(--ink); }
+  .footer-social { display: flex; gap: 20px; margin-top: 20px; }
+  .footer-social a { display: flex; align-items: center; gap: 7px; margin: 0; }
+  .footer-social svg { width: 16px; height: 16px; }
+
+  @media (max-width: 1100px) {
+    .hero-grid, .why-grid, .price-grid, .book-grid { grid-template-columns: 1fr; gap: 48px; }
+    .cohort-card { position: static; }
+    .facts { grid-template-columns: repeat(3, 1fr); }
+    .fact:nth-child(3n) { border-right: none; }
+    .pillars, .addons { grid-template-columns: 1fr; }
+    .day { grid-template-columns: 100px 1fr; }
+    .day .shot { display: none; }
+  }
+  @media (max-width: 860px) {
+    .nav-inner { padding: 14px 20px; }
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--paper-white); border-bottom: 1px solid var(--ink-line);
+      box-shadow: var(--shadow-3); padding: 6px 20px 20px;
+      max-height: calc(100dvh - 64px); overflow-y: auto; display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links .nav-link { font-size: 17px; padding: 15px 2px; border-bottom: 1px solid var(--ink-line); }
+    .nav-links .btn { margin-top: 16px; width: 100%; justify-content: center; padding: 14px 22px; }
+    .subnav { top: 64px; }
+    section[id] { scroll-margin-top: 120px; }
+    .hero .lead { margin-top: 28px; }
+  }
+  @media (max-width: 680px) {
+    .hero h1 { font-size: 50px; }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .rev-grid, .gallery-grid, .book-cols { grid-template-columns: 1fr; }
+    .worry-card { flex-direction: column; align-items: flex-start; }
+    .worry-card .wc-amt { text-align: left; }
+    .gallery-grid .shot:nth-child(1), .gallery-grid .shot:nth-child(6) { grid-column: span 1; grid-row: span 1; }
+    .day { grid-template-columns: 1fr; gap: 14px; }
+    .sec-head h2, .apply-cta h2 { font-size: 38px; }
+    .plan { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 40px; }
+    .sec { padding-top: 60px; padding-bottom: 60px; }
+    .sec-head { margin-bottom: 32px; }
+    .sec-head h2, .apply-cta h2 { font-size: 32px; }
+    .cohort-row { flex-wrap: wrap; }
+  }
+  section[id] { scroll-margin-top: 150px; }
+  @media (max-width: 860px) { section[id] { scroll-margin-top: 120px; } }
+
+  /* ===== consistency pass: match homepage type + replace light-blue fills ===== */
+  main p, main li, main dd, main blockquote, main .faq-a-inner, main .day-body > p, main .pillar p, main .who-block p, main .book-why > p, main .price-lead .note { font-family: var(--font-sans) !important; font-style: normal !important; }
+  main h4, main .addon h4, main .av-body h4, main .worry-card .wc-body h4 { font-family: var(--font-sans) !important; font-weight: 600 !important; font-style: normal !important; letter-spacing: -0.01em; }
+  main em { font-style: normal !important; }
+  main .cr-price, main .pl-amt, main .wc-amt .n, main .price-lead .big, main .fact .v, main .day-num b, main .cohort-head .ttl { font-family: var(--font-sans) !important; font-weight: 600 !important; letter-spacing: -0.02em !important; font-style: normal !important; }
+  main .hero-meta, main .photo-credit, main .cohort-head .sub, main .cr-type, main .cohort-foot .fine, main .fact .v small, main .incl-not, main .day-num, main .itin-note, main .rev-by, main .tst-slide figcaption, main .tst-count, main .price-lead .sub, main .price-lead .not-incl, main .pl-amt small, main .plan-foot .fine, main .apply-cta .contact, main .wc-amt .l { font-family: var(--font-sans) !important; letter-spacing: 0.01em !important; }
+  main .tst-slide blockquote, main .rev-quote { font-weight: 500 !important; }
+  .incl-card, .pillar, .addon, .focus, .cohort-card { background: #fff !important; border: 1px solid var(--ink-line) !important; }
+  .cohort-yeartag { background: #F4F4F2 !important; }
+  .cohort-row .cr-badge.perk { background: #0064F0 !important; color: #fff !important; }
+</style>
+<link rel="stylesheet" href="css/fwb-site.css" />
+</head>
+<body>
+
+<!-- ============ TOP NAV ============ -->
+<a target="_blank" rel="noopener" class="topbar" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Have questions? <span>Book a free 15-minute call</span> with our team →</a>
+
+<!-- ============ TOP NAV ============ -->
+<header class="nav">
+  <div class="nav-inner nav-split">
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="thesis.html">Our Thesis</a>
+      <div class="nav-drop">
+        <button class="nav-link nav-drop-btn" type="button" aria-expanded="false">Program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+        <div class="mega mega-simple">
+          <a href="cape-town.html">Cape Town Immersion</a>
+          <a href="index.html#internship">Global Opportunities</a>
+          <a href="mentors.html">Entrepreneurship Track</a>
+          <a href="internship-track.html">Internship Track</a>
+        </div>
+      </div>
+      <a class="nav-link" href="partners.html">Partners</a>
+      <a class="nav-link" href="https://substack.com/@founderswithoutborders" target="_blank" rel="noopener">Blog</a>
+      <a class="nav-link" href="funding.html">Get Funding</a>
+      <a target="_blank" rel="noopener" class="btn btn-primary btn-sm mobile-only" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+    </div>
+    <a class="nav-center" href="index.html" aria-label="Founders Without Borders home">
+      <img src="images/fwb-logo-transparent.png" alt="" />
+      <span>Founders Without Borders</span>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-pill join" href="https://mailchi.mp/founderswoborders/1s9vzlf3jj" target="_blank" rel="noopener">Join us</a>
+      <a target="_blank" rel="noopener" class="nav-pill apply" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Social Innovation Immersion Program · Cape Town, South Africa</div>
+        <h1>Social Innovation Immersion Program in <em>Cape Town, South Africa</em></h1>
+        <p class="lead">We take U.S. college students and recent grads into emerging markets and give them direct access to the innovators, founders and local leaders solving their communities' most pressing problems.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+          <a class="btn btn-ghost" href="#experience">See the experience</a>
+        </div>
+        <div class="hero-meta">
+          <span class="dot"></span> Next cohort · Jan 1 – 14, 2027 · 12 spots · applications open
+        </div>
+      </div>
+      <div>
+        <div class="hero-feature">
+          <img src="images/photos/hero-group.jpg" alt="The cohort in their Founders Without Borders shirts" />
+        </div>
+        <div class="photo-credit">↑ Founders Without Borders · the inaugural Cape Town cohort</div>
+      </div>
+    </div>
+
+    <!-- quick facts -->
+    <div class="facts">
+      <div class="fact"><div class="k"><i data-lucide="hourglass"></i>Duration</div><div class="v">8–14 days<small>core + extended track</small></div></div>
+      <div class="fact"><div class="k"><i data-lucide="users"></i>Cohort</div><div class="v">12 spots<small>small by design</small></div></div>
+      <div class="fact"><div class="k"><i data-lucide="wallet"></i>Tuition</div><div class="v">From $2,500<small>per cohort</small></div></div>
+      <div class="fact"><div class="k"><i data-lucide="badge-check"></i>Deposit</div><div class="v">$100<small>holds your spot</small></div></div>
+      <div class="fact"><div class="k"><i data-lucide="compass"></i>Focus</div><div class="v">Social<small>community-first innovation</small></div></div>
+    </div>
+  </section>
+
+  <!-- ============ SUB-NAV ============ -->
+  <nav class="subnav" id="subnav">
+    <div class="subnav-inner">
+      <a href="#overview">Why this program</a>
+      <a href="#booking">Pricing &amp; dates</a>
+      <a href="#experience">The experience</a>
+      <a href="#itinerary">Itinerary</a>
+      <a href="#reviews">Participants say</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="sec container" id="overview">
+    <div class="why-grid">
+      <div class="why-body">
+        <div class="eyebrow">Why this program</div>
+        <h2 style="font-size:52px;margin-top:12px;margin-bottom:30px;">A community-first model for <em style="font-style:italic;">changemakers</em></h2>
+        <p class="editorial has-dropcap">Cape Town is one of Africa's most dynamic entrepreneurial ecosystems, and this is your way inside it. You'll work alongside South African impact businesses and social enterprises, learn from the founders already solving real problems, and get hands-on experience building a social venture from the ground up. Walk away with the kind of perspective no classroom can offer.</p>
+        <p class="editorial">It's a peer-to-peer immersion designed to develop the next generation of impact entrepreneurs, rooted in the communities and stories that actually shape South Africa.</p>
+        <div class="who-block">
+          <div class="eyebrow">Who it's for</div>
+          <p>Purpose-driven U.S. college students and recent grads passionate about real-world impact, and eager to develop solutions through community-first innovation. No prior experience required. Curiosity and commitment matter most.</p>
+        </div>
+      </div>
+      <div class="incl-card">
+        <h5>What's included</h5>
+        <ul class="incl-list">
+          <li><i data-lucide="bed-double"></i>Accommodation in well-located Cape Town neighborhoods</li>
+          <li><i data-lucide="utensils"></i>All meals and ground transportation throughout</li>
+          <li><i data-lucide="building-2"></i>Curated site visits with impact businesses and social enterprises</li>
+          <li><i data-lucide="messages-square"></i>Daily workshops and mentorship sessions</li>
+          <li><i data-lucide="sparkles"></i>Evening networking events and cultural experiences</li>
+          <li><i data-lucide="life-buoy"></i>Comprehensive travel support and local guidance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOOKING · why go / what you'll get / dates ============ -->
+  <section class="sec container" id="booking" style="padding-top:24px;">
+    <div class="book-grid">
+      <div>
+        <div class="worry-card">
+          <div class="wc-body">
+            <h4>Worry-free booking</h4>
+            <p>Reserve for just $100. Interest-free monthly payment plans and flexible cancellation on the balance up to 30 days before departure.</p>
+          </div>
+          <div class="wc-amt">
+            <div class="n">$100</div>
+            <div class="l">to reserve your spot</div>
+          </div>
+        </div>
+
+        <div class="book-why">
+          <div class="eyebrow" style="margin-bottom:12px;">Why go</div>
+          <h3>Cape Town brings <em>a lot</em> to the table.</h3>
+          <p>One of Africa's most dynamic entrepreneurial ecosystems, set against Table Mountain, two oceans, and a national park within reach. You'll spend your days alongside the founders and local leaders building real solutions, and your evenings inside the culture that shapes them.</p>
+
+          <div class="book-cols">
+            <div class="get">
+              <h5>What you'll get</h5>
+              <ul>
+                <li><i data-lucide="bed-double"></i>8–14 nights in handpicked accommodations</li>
+                <li><i data-lucide="utensils"></i>8 breakfasts, 2 lunches &amp; 3 dinners</li>
+                <li><i data-lucide="bus"></i>All in-country ground transportation</li>
+                <li><i data-lucide="building-2"></i>Curated visits with impact businesses &amp; social enterprises</li>
+                <li><i data-lucide="messages-square"></i>Daily workshops &amp; mentorship</li>
+                <li><i data-lucide="life-buoy"></i>24/7 in-country support</li>
+              </ul>
+            </div>
+            <div class="pic">
+              <h5>Picture yourself</h5>
+              <ul>
+                <li><i data-lucide="check"></i>Gazing out at the city from the top of Table Mountain</li>
+                <li><i data-lucide="check"></i>Beta testing new Cape Town social ventures at a demo day</li>
+                <li><i data-lucide="check"></i>Walking a township maker space with the founder who built it</li>
+                <li><i data-lucide="check"></i>Sipping wine just feet from where the grapes are grown</li>
+                <li><i data-lucide="check"></i>Sharing what you learned over a farewell dinner</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cohort-card">
+          <div class="cohort-head">
+            <div class="ttl">Select your cohort</div>
+            <div class="sub">From $3,500 · 8–14 days · small cohorts</div>
+          </div>
+          <div class="cohort-yeartag">2027</div>
+          <div class="cohort-row featured">
+            <div>
+              <div class="cr-date">Jan 1 – 14, 2027</div>
+              <div class="cr-type"><i data-lucide="compass"></i>Extended track · 14 days</div>
+              <span class="cr-badge perk">Flights included</span>
+            </div>
+            <div class="cr-price">$4,000</div>
+          </div>
+          <div class="cohort-row">
+            <div>
+              <div class="cr-date">March 6 – 14, 2027</div>
+              <div class="cr-type"><i data-lucide="compass"></i>Core immersion · 9 days</div>
+            </div>
+            <div class="cr-price">$3,500</div>
+          </div>
+          <div class="cohort-row">
+            <div>
+              <div class="cr-date">May 2027</div>
+              <div class="cr-type"><i data-lucide="compass"></i>Core immersion · dates TBD</div>
+              <span class="cr-badge perk">Flights included</span>
+            </div>
+            <div class="cr-price">$4,500</div>
+          </div>
+          <div class="cohort-foot">
+            <a class="btn btn-primary" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+            <div class="fine">$100 deposit holds your spot. 3- and 6-month interest-free plans available. A 14-day extended track is offered for each cohort. Ask us for details.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE EXPERIENCE ============ -->
+  <section class="sec container" id="experience" style="padding-top:24px;">
+    <div class="sec-head">
+      <div class="eyebrow">The experience</div>
+      <h2>Three ways you'll <em>go deep</em></h2>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <div class="shot"><img src="images/photos/p19.jpg" alt="Food-security site visit" /></div>
+        <div class="p-body">
+          <div class="p-tag">Real impact work</div>
+          <h3>Collaborate, don't observe</h3>
+          <p>Work with South African impact businesses and social enterprises leading initiatives in startups, VCs, sustainable fashion, community development, and food security.</p>
+        </div>
+      </article>
+      <article class="pillar">
+        <div class="shot"><img src="images/photos/p29.jpg" alt="Cultural immersion" /></div>
+        <div class="p-body">
+          <div class="p-tag">Cultural immersion</div>
+          <h3>Beyond tourism</h3>
+          <p>Step into the communities, traditions, and stories that shape South Africa's entrepreneurial spirit, and learn how place and culture drive innovation.</p>
+        </div>
+      </article>
+      <article class="pillar">
+        <div class="shot"><img src="images/photos/p30.jpg" alt="Startup hub visit" /></div>
+        <div class="p-body">
+          <div class="p-tag">Innovation &amp; entrepreneurship</div>
+          <h3>Build your network</h3>
+          <p>Meet and learn from local social entrepreneurs and business leaders building real ventures, and find your place in a community that keeps building together.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ITINERARY ============ -->
+  <section class="sec container" id="itinerary" style="padding-top:24px;">
+    <div class="sec-head">
+      <div class="eyebrow">Day by day</div>
+      <h2>Your journey</h2>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Day<b>1</b></div>
+      <div class="day-body">
+        <h3>Arrival &amp; orientation</h3>
+        <p>Welcome to Cape Town. Arrive, settle into your accommodation, and gather for an orientation dinner with the cohort and local guides, the start of the network you'll build throughout the trip.</p>
+      </div>
+      <div class="shot"><img src="images/photos/welcome-mother-city.jpg" alt="Welcome to the Mother City" /></div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Days<b>2–3</b></div>
+      <div class="day-body">
+        <h3>Urban innovation</h3>
+        <p>Step inside the city's startup ecosystem. Visit hubs and accelerators, meet founders and investors, and understand the local context through guided tours and hands-on workshops.</p>
+        <ul class="day-high">
+          <li><div class="lbl">Highlights</div></li>
+          <li><i data-lucide="check"></i>Startup-hub and accelerator visits</li>
+          <li><i data-lucide="check"></i>Founder &amp; VC conversations</li>
+          <li><i data-lucide="check"></i>Sustainable-fashion and impact-business tours</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/photos/urban-innovation-tour.jpg" alt="Guided innovation-lab tour" /></div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Days<b>4–5</b></div>
+      <div class="day-body">
+        <span class="day-tag tag-moss">Immersion</span>
+        <h3>Community immersion</h3>
+        <p>Engage directly with community leaders and active development projects. Participate in meaningful work alongside social enterprises in food security, community development, and education.</p>
+        <ul class="day-high">
+          <li><div class="lbl">Highlights</div></li>
+          <li><i data-lucide="check"></i>Social-enterprise site visits</li>
+          <li><i data-lucide="check"></i>Food-security &amp; school-feeding partners</li>
+          <li><i data-lucide="check"></i>Collaborative, hands-on project work</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/photos/p24.jpg" alt="School feeding partner" /></div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Days<b>6–7</b></div>
+      <div class="day-body">
+        <h3>Deep dives &amp; reflection</h3>
+        <p>Intensive workshops on impact measurement, scaling social ventures, and systemic change. Reflect on what you've learned with your cohort and mentors before you carry it home.</p>
+        <ul class="day-high">
+          <li><div class="lbl">Highlights</div></li>
+          <li><i data-lucide="check"></i>Innovation-lab visit</li>
+          <li><i data-lucide="check"></i>Impact, ESG &amp; scaling workshop</li>
+          <li><i data-lucide="check"></i>Guided cohort reflection</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/photos/laptop-writing.jpg" alt="Cohort reflection and writing" /></div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Days<b>8–13</b></div>
+      <div class="day-body">
+        <span class="day-tag tag-ochre">Extended track · optional</span>
+        <h3>Go further</h3>
+        <p>Advanced mentorship, networking opportunities with impact leaders across different industries, and personalized deep-dive projects with partner organizations, plus more time in the field.</p>
+        <ul class="day-high">
+          <li><div class="lbl">Highlights</div></li>
+          <li><i data-lucide="check"></i>Advanced mentorship</li>
+          <li><i data-lucide="check"></i>Networking with impact leaders across industries</li>
+          <li><i data-lucide="check"></i>Partner deep-dive projects</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/photos/impact-leaders-roundtable.jpg" alt="Roundtable with impact leaders" /></div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">Final<b>Day</b></div>
+      <div class="day-body">
+        <h3>Closing &amp; <em>next steps</em></h3>
+        <p>Celebrate with your cohort, present your key learnings, and step into an alumni network and ongoing engagement that keeps building long after you fly home.</p>
+        <ul class="day-high">
+          <li><div class="lbl">Highlights</div></li>
+          <li><i data-lucide="check"></i>Capstone share-out</li>
+          <li><i data-lucide="check"></i>Certificates &amp; recognition</li>
+          <li><i data-lucide="check"></i>Farewell dinner</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/photos/p12.jpg" alt="Certificate and closing" /></div>
+    </div>
+
+    <p class="itin-note">Itinerary based on our first cohort. The exact daily schedule for each cohort is confirmed before departure.</p>
+
+    <!-- experiences -->
+    <div style="margin-top:64px;">
+      <div class="eyebrow" style="margin-bottom:8px;">Part of the experience</div>
+      <p style="font-family:var(--font-sans);font-size:15px;color:var(--ink-3);margin-bottom:24px;max-width:560px;">Excursions woven into the program, included with your cohort.</p>
+      <div class="addons">
+        <div class="addon addon-video">
+          <div class="av-media"><video src="videos/clip-1.mp4" muted loop playsinline controls></video></div>
+        </div>
+        <div class="addon addon-video">
+          <div class="av-media"><video src="videos/cpt-picnic.mp4" muted loop playsinline controls></video></div>
+        </div>
+        <div class="addon addon-video">
+          <div class="av-media"><video src="videos/table-mountain.mp4" muted loop playsinline controls></video></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOCUS AREAS ============ -->
+  <section class="sec focus" id="focus">
+    <div class="container">
+      <div class="sec-head" style="margin-bottom:36px;">
+        <div class="eyebrow">This is for you if you're interested in</div>
+        <h2>Where impact <em>meets ambition</em></h2>
+      </div>
+      <div class="focus-tags">
+        <span>Social entrepreneurship</span>
+        <span>Community-led innovation</span>
+        <span>Global leadership</span>
+        <span>Sustainability &amp; ESG</span>
+        <span>Youth development</span>
+        <span>Impact investing</span>
+        <span>Policy &amp; systems change</span>
+        <span>Education &amp; equity</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="sec reviews" id="reviews">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow">Participants say</div>
+        <h2 style="color:var(--paper-white);">What our participants <em>have to say</em></h2>
+      </div>
+      <div class="tst-stage">
+        <figure class="tst-slide is-active">
+          <blockquote>"This was an amazing program. I've done abroad immersions before, but never directly related to my passion for social impact. Working with peers and learning from other founders has inspired me to incorporate collective action in problem-solving: approaching challenges with creativity, empathy, and persistence."</blockquote>
+          <figcaption>Program participant</figcaption>
+        </figure>
+        <figure class="tst-slide">
+          <blockquote>"A transformative, immersive experience that shifted my perspective on how I can be a catalyst for global social change."</blockquote>
+          <figcaption>Program participant · Student</figcaption>
+        </figure>
+        <figure class="tst-slide">
+          <blockquote>"Extremely rewarding. Getting to know others with similar values and ambition makes me think: why not go after my biggest goals?"</blockquote>
+          <figcaption>Program participant · Aspiring entrepreneur</figcaption>
+        </figure>
+        <figure class="tst-slide">
+          <blockquote>"Inspiring, to say the least. I connected with peers doing great work across so many fields, and networked with professionals creating spaces for inclusivity and visibility, not just in the country, but across the continent."</blockquote>
+          <figcaption>Program participant · Journalist &amp; founder</figcaption>
+        </figure>
+        <figure class="tst-slide">
+          <blockquote>"Being part of the first cohort helped me build the global network I needed to expand my social-impact work and drive broader, community-centered change."</blockquote>
+          <figcaption>Program participant · Early-stage founder</figcaption>
+        </figure>
+      </div>
+      <div class="tst-nav">
+        <button class="tst-arrow" id="tstPrev" aria-label="Previous testimonial"><i data-lucide="chevron-left"></i></button>
+        <span class="tst-count"><span id="tstCur">1</span> / <span id="tstTotal">5</span></span>
+        <button class="tst-arrow" id="tstNext" aria-label="Next testimonial"><i data-lucide="chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="sec container" id="faq" style="padding-top:24px;">
+    <div class="sec-head">
+      <div class="eyebrow">Good questions</div>
+      <h2>Before you apply</h2>
+    </div>
+    <div class="faq-wrap" id="faqWrap">
+      <div class="faq-item">
+        <button class="faq-q">What's included in the price?<i data-lucide="plus"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">All accommodations, meals, workshops, site visits, ground transportation, and mentorship sessions. Flights are included in some programs; optional excursions may carry an additional cost.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is the deposit refundable?<i data-lucide="plus"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">The $100 deposit is non-refundable. However, we offer flexible cancellation for the remaining balance up to 30 days before departure.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need experience in social impact?<i data-lucide="plus"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">No. We welcome participants at all levels of impact experience. Curiosity, openness, and a commitment to learning are what matter most.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What should I bring?<i data-lucide="plus"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Light, comfortable clothing for Cape Town's warm summer weather, business-casual attire for workshops and site visits, comfortable walking shoes, and sunscreen. A detailed packing list is provided once you register.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do I apply?<i data-lucide="plus"></i></button>
+        <div class="faq-a"><div class="faq-a-inner">Reserve your spot and complete a brief application. Spots are limited to 12 per cohort and secured on a first-come, first-served basis with a $100 deposit.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="apply-cta container" id="apply">
+    <div class="eyebrow">Cohort year one · 12 spots</div>
+    <h2>Join the next generation of <em>impact entrepreneurs</em></h2>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+      <a class="btn btn-ghost" href="#itinerary">Review the itinerary</a>
+    </div>
+    <div class="contact">Questions? <a href="mailto:laurenne@founderswoborders.com">laurenne@founderswoborders.com</a></div>
+  </section>
+</main>
+
+<!-- ============ SAVE YOUR SPOT ============ -->
+<section class="visit">
+  <div class="visit-inner">
+    <h2 class="visit-title">Join us in Cape Town</h2>
+    <div class="visit-grid">
+      <div class="visit-media"><video src="videos/cape-town-hero.mp4" poster="images/photos/cape-town-aerial.png" autoplay muted loop playsinline></video><button class="vm-sound" type="button" aria-label="Turn sound on" onclick="var v=this.previousElementSibling;v.muted=!v.muted;if(!v.muted){v.volume=1;v.play();}this.classList.toggle('on',!v.muted);this.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');this.querySelector('span').textContent=v.muted?'Sound on':'Sound off';"><svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg><svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg><span>Sound on</span></button></div>
+      <div class="visit-copy">
+        <span class="visit-kicker">Limited spots available</span>
+        <h3>Let's save your spot</h3>
+        <p>We connect founders to global opportunities. Whether you're ready to apply or still have questions, we're here to help.</p>
+        <div class="visit-actions">
+          <a class="visit-btn solid" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+          <a target="_blank" rel="noopener" class="visit-btn" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a free 15-minute call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="footer-logo" href="index.html" aria-label="Founders Without Borders home"><span class="fl-words"><span class="fl-1">Founders</span><span class="fl-2">Without</span><span class="fl-3">Borders</span></span><img src="images/fwb-logo-transparent.png" alt="" /></a>
+      <div class="footer-lede">Future-proof the opportunities of tomorrow<br />by connecting founders of today</div>
+      <form class="footer-subscribe" id="subscribeForm">
+        <label for="subEmail">Subscribe for updates</label>
+        <div class="sub-row">
+          <input type="email" id="subEmail" name="email" placeholder="you@email.com" required />
+          <button type="submit"><i data-lucide="arrow-right"></i></button>
+        </div>
+        <p class="sub-note" id="subNote" hidden>Thanks, we'll be in touch.</p>
+      </form>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>Instagram</a>
+        <a href="https://www.linkedin.com/company/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h6>Explore</h6>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="cape-town.html">Cape Town</a>
+      <a href="past-events.html">Past events</a>
+    </div>
+    <div>
+      <h6>Program</h6>
+      <a href="cape-town.html#overview">Why this program</a>
+      <a href="cape-town.html#experience">The experience</a>
+      <a href="cape-town.html#booking">Pricing &amp; dates</a>
+    </div>
+    <div>
+      <h6>Apply</h6>
+      <a href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+      <a href="mailto:laurenne@founderswoborders.com">laurenne@founderswoborders.com</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Founders Without Borders. All rights reserved.</span>
+    <span>Limited spots available · Applications are open</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.faq-item');
+      var ans = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (o) {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) { item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+    });
+  });
+
+  var subLinks = Array.prototype.slice.call(document.querySelectorAll('.subnav a'));
+  var sections = subLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function onScroll() {
+    var pos = window.scrollY + 160, activeIdx = 0;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= pos) activeIdx = i; });
+    subLinks.forEach(function (a, i) { a.classList.toggle('active', i === activeIdx); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var navT=document.querySelector('.nav-toggle'), navL=document.querySelector('.nav-links');
+  if(navT&&navL){ navT.addEventListener('click',function(){
+    var open=navL.classList.toggle('open');
+    navT.setAttribute('aria-expanded', open?'true':'false');
+  }); }
+
+  var sf=document.getElementById('subscribeForm');
+  if(sf){ sf.addEventListener('submit',function(e){
+    e.preventDefault();
+    window.open('https://mailchi.mp/founderswoborders/1s9vzlf3jj','_blank','noopener');
+    document.getElementById('subNote').hidden=false;
+    sf.querySelector('.sub-row').style.display='none';
+  }); }
+
+  var tstSlides=Array.prototype.slice.call(document.querySelectorAll('.tst-slide'));
+  if(tstSlides.length){
+    var tIdx=0, tCur=document.getElementById('tstCur'), tTot=document.getElementById('tstTotal');
+    if(tTot){ tTot.textContent=tstSlides.length; }
+    function tShow(n){ tIdx=(n+tstSlides.length)%tstSlides.length; tstSlides.forEach(function(s,i){ s.classList.toggle('is-active', i===tIdx); }); if(tCur){ tCur.textContent=tIdx+1; } }
+    var tp=document.getElementById('tstPrev'), tn=document.getElementById('tstNext');
+    if(tp){ tp.addEventListener('click',function(){ tShow(tIdx-1); }); }
+    if(tn){ tn.addEventListener('click',function(){ tShow(tIdx+1); }); }
+    tShow(0);
+  }
+</script>
+<script>
+(function(){
+  var nd=document.querySelector('.nav-drop'), nb=nd&&nd.querySelector('.nav-drop-btn');
+  if(nb){ nb.addEventListener('click',function(e){ e.stopPropagation(); var o=nd.classList.toggle('open'); nb.setAttribute('aria-expanded',o?'true':'false'); });
+    document.addEventListener('click',function(e){ if(!nd.contains(e.target)){ nd.classList.remove('open'); nb.setAttribute('aria-expanded','false'); } });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ nd.classList.remove('open'); } }); }
+})();
+</script>
+</body>
+</html>

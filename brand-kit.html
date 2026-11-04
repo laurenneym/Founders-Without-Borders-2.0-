@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand Kit — Founders Without Borders</title>
+<link rel="icon" type="image/png" href="images/fwb-logo-transparent.png" />
+<link rel="stylesheet" href="css/colors_and_type.css" />
+<link rel="stylesheet" href="css/site.css" />
+<link rel="stylesheet" href="css/brand-chrome.css" />
+<style id="page">
+  body { background: #ffffff; }
+  .bk-hero { background: #ffffff; }
+  /* ===== scaffold ===== */
+  .bk-sec { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .bk-block { padding: 72px 0; border-bottom: 1px solid var(--ink-line); }
+  .bk-block:last-of-type { border-bottom: none; }
+  .bk-eyebrow { display: block; font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #0064F0; margin-bottom: 16px; }
+  .bk-h2 { font-family: var(--font-display); font-size: 44px; line-height: 1.03; margin: 0 0 14px; color: var(--ink); }
+  .bk-h2 em { font-style: italic; }
+  .bk-intro { font-family: var(--font-serif); font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 60ch; margin: 0 0 44px; }
+
+  /* ===== hero ===== */
+  .bk-hero { background: var(--paper); border-bottom: 1px solid var(--ink-line); }
+  .bk-hero-inner { max-width: 1180px; margin: 0 auto; padding: 84px 32px 72px; }
+  .bk-hero h1 { font-family: var(--font-display); font-size: clamp(48px, 8vw, 104px); line-height: 1.05; letter-spacing: -0.01em; margin: 14px 0 0; color: var(--ink); }
+  .bk-hero h1 em { font-style: italic; color: #0064F0; }
+  .bk-hero p { font-family: var(--font-serif); font-size: 21px; line-height: 1.5; color: var(--ink-2); max-width: 52ch; margin: 34px 0 0; }
+
+  /* ===== logo ===== */
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .logo-tile { border: 1px solid var(--ink-line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-1); }
+  .logo-stage { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; padding: 40px; }
+  .logo-stage img { max-width: 70%; max-height: 100%; object-fit: contain; }
+  .logo-stage.on-cream { background: var(--paper); }
+  .logo-stage.on-white { background: #fff; }
+  .logo-stage.on-blue { background: #0064F0; }
+  .logo-stage.on-ink { background: var(--ink); }
+  .logo-stage.on-blue img, .logo-stage.on-ink img { filter: brightness(0) invert(1); }
+  .logo-cap { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); padding: 14px 18px; border-top: 1px solid var(--ink-line); background: var(--paper-white); letter-spacing: 0.02em; }
+  .wordmark-tile { grid-column: span 2; }
+  .wordmark-stage { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 44px 48px; background: var(--paper); }
+  .wm-line { font-family: var(--font-sans); font-weight: 800; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.025em; color: var(--ink); font-size: clamp(34px, 6vw, 64px); }
+  .wm-line.accent { color: #0064F0; }
+  .lockup-tile .logo-stage { gap: 18px; }
+  .lockup { display: flex; align-items: center; gap: 16px; }
+  .lockup img { width: 56px; height: 56px; object-fit: contain; }
+  .lockup span { font-family: var(--font-sans); font-weight: 700; font-size: 22px; color: var(--ink); line-height: 1.05; max-width: 8ch; }
+  .lockup span em { font-style: normal; color: #0064F0; }
+
+  /* ===== color ===== */
+  .swatch-group + .swatch-group { margin-top: 40px; }
+  .swatch-group h3 { font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 18px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+  .swatch { border: 1px solid var(--ink-line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-1); }
+  .swatch .chip { height: 96px; }
+  .swatch .meta { padding: 12px 14px; background: var(--paper-white); }
+  .swatch .name { font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .swatch .hex { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 3px; text-transform: uppercase; }
+
+  /* ===== type ===== */
+  .type-row { padding: 28px 0; border-top: 1px solid var(--ink-line); display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: baseline; }
+  .type-row:first-of-type { border-top: none; }
+  .type-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+  .type-meta strong { display: block; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: 0; margin-bottom: 4px; }
+  .type-spec-display { font-family: var(--font-display); font-size: 60px; line-height: 1.02; color: var(--ink); margin: 0; }
+  .type-spec-display em { font-style: italic; color: #0064F0; }
+  .type-spec-serif { font-family: var(--font-serif); font-size: 22px; line-height: 1.6; color: var(--ink-2); margin: 0; max-width: 54ch; }
+  .type-spec-serif em { font-style: italic; }
+  .type-spec-sans { font-family: var(--font-sans); font-size: 18px; line-height: 1.5; color: var(--ink); margin: 0; }
+  .type-spec-mono { font-family: var(--font-mono); font-size: 16px; color: var(--ink-2); margin: 0; letter-spacing: 0.02em; }
+  .scale-list { display: flex; flex-direction: column; gap: 4px; }
+  .scale-list span { font-family: var(--font-display); color: var(--ink); line-height: 1.1; }
+
+  /* ===== components ===== */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .comp-card { border: 1px solid var(--ink-line); border-radius: var(--r-lg); background: var(--paper-white); padding: 32px; box-shadow: var(--shadow-1); }
+  .comp-card h4 { font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 22px; }
+  .comp-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .bk-btn { font-family: var(--font-sans); font-size: 14px; font-weight: 600; letter-spacing: 0.01em; border-radius: var(--r-md); padding: 13px 26px; border: 1px solid transparent; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 160ms ease, transform 160ms ease; }
+  .bk-btn-primary { background: #0064F0; color: #fff; }
+  .bk-btn-primary:hover { background: #0052CC; }
+  .bk-btn-yellow { background: #FDFBD4; color: var(--ink); }
+  .bk-btn-ghost { background: transparent; border-color: var(--ink-line-2); color: var(--ink); }
+  .bk-btn-ghost:hover { background: var(--paper-2); }
+  .bk-pill { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; padding: 6px 14px; border-radius: var(--r-pill); }
+  .pill-blue { background: #EFF3F7; color: #0064F0; }
+  .pill-yellow { background: #FDFBD4; color: #6b5b16; }
+  .pill-ink { background: var(--ink); color: var(--paper-white); }
+  .bk-input { font-family: var(--font-sans); font-size: 15px; padding: 13px 16px; border: 1px solid var(--ink-line-2); border-radius: var(--r-md); background: #fff; color: var(--ink); width: 100%; max-width: 320px; }
+  .radii-row { display: flex; gap: 18px; flex-wrap: wrap; }
+  .radii-chip { width: 96px; height: 72px; background: #EFF3F7; border: 1px solid var(--ink-line-2); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+
+  /* ===== voice ===== */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .voice-card { border-radius: var(--r-lg); padding: 30px 32px; border: 1px solid var(--ink-line); }
+  .voice-card.do { background: #EFF3F7; }
+  .voice-card.dont { background: var(--paper-2); }
+  .voice-card .label { font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px; }
+  .voice-card.do .label { color: #0064F0; }
+  .voice-card.dont .label { color: var(--ink-3); }
+  .voice-card ul { margin: 0; padding-left: 20px; }
+  .voice-card li { font-family: var(--font-serif); font-size: 17px; line-height: 1.55; color: var(--ink-2); margin-bottom: 10px; }
+  .lexicon { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .lexicon div { border-top: 1px solid var(--ink); padding-top: 16px; }
+  .lexicon h5 { font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
+  .lexicon p { font-family: var(--font-serif); font-size: 16px; line-height: 1.7; color: var(--ink-2); margin: 0; }
+
+  @media (max-width: 900px) {
+    .logo-grid { grid-template-columns: 1fr 1fr; }
+    .wordmark-tile { grid-column: span 2; }
+    .comp-grid, .voice-grid, .lexicon { grid-template-columns: 1fr; }
+    .type-row { grid-template-columns: 1fr; gap: 14px; }
+    .type-spec-display { font-size: 44px; }
+  }
+  @media (max-width: 560px) {
+    .logo-grid { grid-template-columns: 1fr; }
+    .wordmark-tile { grid-column: span 1; }
+  }
+</style>
+<link rel="stylesheet" href="css/fwb-site.css" />
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#F4EEE2"/>
+    <rect x="30" y="30" width="18" height="40" rx="3" fill="#0064F0"/>
+    <rect x="52" y="30" width="18" height="40" rx="3" fill="#FDFBD4"/>
+    <circle cx="50" cy="22" r="6" fill="#1C1814"/>
+  </svg>
+</template>
+
+
+<!-- ============ TOP NAV ============ -->
+<a target="_blank" rel="noopener" class="topbar" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Have questions? <span>Book a free 15-minute call</span> with our team →</a>
+
+<!-- ============ TOP NAV ============ -->
+<header class="nav">
+  <div class="nav-inner nav-split">
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="thesis.html">Our Thesis</a>
+      <div class="nav-drop">
+        <button class="nav-link nav-drop-btn" type="button" aria-expanded="false">Program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+        <div class="mega mega-simple">
+          <a href="cape-town.html">Cape Town Immersion</a>
+          <a href="index.html#internship">Global Opportunities</a>
+          <a href="mentors.html">Entrepreneurship Track</a>
+          <a href="internship-track.html">Internship Track</a>
+        </div>
+      </div>
+      <a class="nav-link" href="partners.html">Partners</a>
+      <a class="nav-link" href="https://substack.com/@founderswithoutborders" target="_blank" rel="noopener">Blog</a>
+      <a class="nav-link" href="funding.html">Get Funding</a>
+      <a target="_blank" rel="noopener" class="btn btn-primary btn-sm mobile-only" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+    </div>
+    <a class="nav-center" href="index.html" aria-label="Founders Without Borders home">
+      <img src="images/fwb-logo-transparent.png" alt="" />
+      <span>Founders Without Borders</span>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-pill join" href="https://mailchi.mp/founderswoborders/1s9vzlf3jj" target="_blank" rel="noopener">Join us</a>
+      <a target="_blank" rel="noopener" class="nav-pill apply" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a call</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="bk-hero">
+    <div class="bk-hero-inner">
+      <span class="bk-eyebrow">Brand kit</span>
+      <h1>Founders <em>Without Borders</em></h1>
+      <p>The building blocks of our identity, logo, color, type, components, and voice. Use this as the single reference for anything that carries the Founders Without Borders name.</p>
+    </div>
+  </section>
+
+  <!-- ============ LOGO ============ -->
+  <section class="bk-block">
+    <div class="bk-sec">
+      <span class="bk-eyebrow">01 · Logo</span>
+      <h2 class="bk-h2">The mark &amp; <em>wordmark</em></h2>
+      <p class="bk-intro">Our mark is the tree of life, roots and branches, growth and grounding. It carries the brand on its own and locks up beside the wordmark. Give it room: keep clear space around the mark equal to at least the height of one root system.</p>
+      <div class="logo-grid">
+        <div class="logo-tile">
+          <div class="logo-stage on-cream"><img src="images/fwb-logo-transparent.png" alt="FWB mark on cream" /></div>
+          <div class="logo-cap">Mark · on cream (default)</div>
+        </div>
+        <div class="logo-tile">
+          <div class="logo-stage on-white"><img src="images/fwb-logo-transparent.png" alt="FWB mark on white" /></div>
+          <div class="logo-cap">Mark · on white</div>
+        </div>
+        <div class="logo-tile">
+          <div class="logo-stage on-blue"><img src="images/fwb-logo-transparent.png" alt="FWB mark on blue" /></div>
+          <div class="logo-cap">Mark · reversed on blue</div>
+        </div>
+        <div class="logo-tile wordmark-tile">
+          <div class="wordmark-stage">
+            <span class="wm-line">Founders</span>
+            <span class="wm-line">Without</span>
+            <span class="wm-line accent">Borders</span>
+          </div>
+          <div class="logo-cap">Wordmark · Geist 800, "Borders" in postcard blue</div>
+        </div>
+        <div class="logo-tile lockup-tile">
+          <div class="logo-stage on-ink">
+            <div class="lockup">
+              <img src="images/fwb-logo-transparent.png" alt="FWB lockup" />
+              <span>Founders <em>Without</em> Borders</span>
+            </div>
+          </div>
+          <div class="logo-cap">Horizontal lockup · reversed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLOR ============ -->
+  <section class="bk-block">
+    <div class="bk-sec">
+      <span class="bk-eyebrow">02 · Color</span>
+      <h2 class="bk-h2">A warm base, one calm <em>accent</em></h2>
+      <p class="bk-intro">Cream and ink do the heavy lifting. Postcard blue is the single structural accent, eyebrows, links, the wordmark, the footer. Butter yellow marks one thing only: action. Soft blues fill panels. No pure white, no pure black.</p>
+
+      <div class="swatch-group">
+        <h3>Core, paper &amp; ink</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:#F4EEE2;"></div><div class="meta"><div class="name">Paper</div><div class="hex">#F4EEE2</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#FAF6EE;"></div><div class="meta"><div class="name">Paper white</div><div class="hex">#FAF6EE</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#EBE3D1;"></div><div class="meta"><div class="name">Paper 2</div><div class="hex">#EBE3D1</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#1C1814;"></div><div class="meta"><div class="name">Ink</div><div class="hex">#1C1814</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#3A322A;"></div><div class="meta"><div class="name">Ink 2</div><div class="hex">#3A322A</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#6B5F52;"></div><div class="meta"><div class="name">Ink 3 (muted)</div><div class="hex">#6B5F52</div></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-group">
+        <h3>Brand blues, structure &amp; accent</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:#0064F0;"></div><div class="meta"><div class="name">Postcard blue</div><div class="hex">#0064F0</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#0052CC;"></div><div class="meta"><div class="name">Blue (hover)</div><div class="hex">#0052CC</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#0064F0;"></div><div class="meta"><div class="name">Deep blue</div><div class="hex">#0064F0</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#EFF3F7;"></div><div class="meta"><div class="name">Mist (panels)</div><div class="hex">#EFF3F7</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#D1E6F6;"></div><div class="meta"><div class="name">Sky tint</div><div class="hex">#D1E6F6</div></div></div>
+        </div>
+      </div>
+
+      <div class="swatch-group">
+        <h3>Action &amp; warm accents</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:#FDFBD4;"></div><div class="meta"><div class="name">Butter (action)</div><div class="hex">#FDFBD4</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#D9A441;"></div><div class="meta"><div class="name">Ochre (stars)</div><div class="hex">#D9A441</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#C75D3A;"></div><div class="meta"><div class="name">Terracotta</div><div class="hex">#C75D3A</div></div></div>
+          <div class="swatch"><div class="chip" style="background:#8A3A1F;"></div><div class="meta"><div class="name">Rust (links)</div><div class="hex">#8A3A1F</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPE ============ -->
+  <section class="bk-block">
+    <div class="bk-sec">
+      <span class="bk-eyebrow">03 · Typography</span>
+      <h2 class="bk-h2">One typeface, <em>many voices</em></h2>
+      <p class="bk-intro">Geist carries the whole site. Headings are set bold and tight, body copy is regular and open, and Geist Mono handles dates, prices and other figures. Use weight and size for hierarchy, not extra fonts.</p>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Geist Semibold</strong>Display headings<br />Hero · H1 · H2</div>
+        <p class="type-spec-display">Spend a season <em>inside</em> the work.</p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Geist Regular</strong>Long-form body<br />Lead · paragraph · pull-quote</div>
+        <p class="type-spec-serif">We connect young entrepreneurs to emerging markets, where they learn human-centered entrepreneurship from the founders and local leaders solving real problems. <em>The work is a story being told.</em></p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Geist</strong>Interface<br />Nav · buttons · labels · forms</div>
+        <p class="type-spec-sans">Reserve your spot · Read past immersions · Subscribe for updates</p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Geist Mono</strong>Figures &amp; metadata<br />Dates · folios · indices</div>
+        <p class="type-spec-mono">Cape Town · Jan 1 – 14, 2027 · 12 spots · $2,500</p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Display scale</strong>Geist</div>
+        <div class="scale-list">
+          <span style="font-size:64px;">Aa, 64 / H1</span>
+          <span style="font-size:46px;">Aa, 46 / H2</span>
+          <span style="font-size:34px;">Aa, 34 / H3</span>
+          <span style="font-size:26px;">Aa, 26 / H4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTS ============ -->
+  <section class="bk-block">
+    <div class="bk-sec">
+      <span class="bk-eyebrow">04 · Components</span>
+      <h2 class="bk-h2">Restrained, hairline, <em>warm</em></h2>
+      <p class="bk-intro">Buttons use an 8px radius and never go pill-shaped. Pills are reserved for tags and status. Cards sit on paper-white with a 1px hairline and a warm, low shadow. Inputs are quiet rectangles.</p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h4>Buttons</h4>
+          <div class="comp-row">
+            <a class="bk-btn bk-btn-primary" href="#">Reserve your spot</a>
+            <a class="bk-btn bk-btn-yellow" href="#">Join our community</a>
+            <a class="bk-btn bk-btn-ghost" href="#">Read our story</a>
+          </div>
+        </div>
+        <div class="comp-card">
+          <h4>Tags &amp; status</h4>
+          <div class="comp-row">
+            <span class="bk-pill pill-blue">Applications open</span>
+            <span class="bk-pill pill-yellow">Flights included</span>
+            <span class="bk-pill pill-ink">Inaugural cohort</span>
+          </div>
+        </div>
+        <div class="comp-card">
+          <h4>Input</h4>
+          <div class="comp-row">
+            <input class="bk-input" type="email" placeholder="you@email.com" />
+          </div>
+        </div>
+        <div class="comp-card">
+          <h4>Radii</h4>
+          <div class="radii-row">
+            <div class="radii-chip" style="border-radius:4px;">4 · sm</div>
+            <div class="radii-chip" style="border-radius:8px;">8 · btn</div>
+            <div class="radii-chip" style="border-radius:14px;">14 · card</div>
+            <div class="radii-chip" style="border-radius:999px;">pill · tag</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VOICE ============ -->
+  <section class="bk-block">
+    <div class="bk-sec">
+      <span class="bk-eyebrow">05 · Voice</span>
+      <h2 class="bk-h2">Like a thoughtful <em>editor</em></h2>
+      <p class="bk-intro">Knowing but not academic. Warm without being twee. Confident, direct, grounded in real specifics. Sentence case everywhere, never Title Case, never ALL CAPS in running text.</p>
+      <div class="voice-grid">
+        <div class="voice-card do">
+          <p class="label">We sound like</p>
+          <ul>
+            <li>"Eight to fourteen days inside one emerging market, building alongside the people already solving real problems."</li>
+            <li>"Curiosity and commitment matter most. If you'd rather build than observe, you'll fit right in."</li>
+          </ul>
+        </div>
+        <div class="voice-card dont">
+          <p class="label">We never sound like</p>
+          <ul>
+            <li>"🚀 Disrupt your career and join the next-gen founder movement!"</li>
+            <li>"Unlock your potential and crush it with our exclusive global accelerator."</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lexicon">
+        <div>
+          <h5>We say</h5>
+          <p>founder · fellow · cohort · host · partner · fieldwork · immersion · emerging market · ecosystem · practice · place</p>
+        </div>
+        <div>
+          <h5>We don't say</h5>
+          <p>disrupt · hustle · grindset · killer · crushing it · rockstar · gamechanger · synergy · unlock · "future of , "</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ SAVE YOUR SPOT ============ -->
+<section class="visit">
+  <div class="visit-inner">
+    <h2 class="visit-title">Join us in Cape Town</h2>
+    <div class="visit-grid">
+      <div class="visit-media"><video src="videos/cape-town-hero.mp4" poster="images/photos/cape-town-aerial.png" autoplay muted loop playsinline></video><button class="vm-sound" type="button" aria-label="Turn sound on" onclick="var v=this.previousElementSibling;v.muted=!v.muted;if(!v.muted){v.volume=1;v.play();}this.classList.toggle('on',!v.muted);this.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');this.querySelector('span').textContent=v.muted?'Sound on':'Sound off';"><svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg><svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg><span>Sound on</span></button></div>
+      <div class="visit-copy">
+        <span class="visit-kicker">Limited spots available</span>
+        <h3>Let's save your spot</h3>
+        <p>We connect founders to global opportunities. Whether you're ready to apply or still have questions, we're here to help.</p>
+        <div class="visit-actions">
+          <a class="visit-btn solid" href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+          <a target="_blank" rel="noopener" class="visit-btn" href="https://calendly.com/laurenne-founderswoborders/new-meeting">Book a free 15-minute call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="footer-logo" href="index.html" aria-label="Founders Without Borders home"><span class="fl-words"><span class="fl-1">Founders</span><span class="fl-2">Without</span><span class="fl-3">Borders</span></span><img src="images/fwb-logo-transparent.png" alt="" /></a>
+      <div class="footer-lede">Future-proof the opportunities of tomorrow<br />by connecting founders of today</div>
+      <form class="footer-subscribe" id="subscribeForm">
+        <label for="subEmail">Subscribe for updates</label>
+        <div class="sub-row">
+          <input type="email" id="subEmail" name="email" placeholder="you@email.com" required />
+          <button type="submit"><i data-lucide="arrow-right"></i></button>
+        </div>
+        <p class="sub-note" id="subNote" hidden>Thanks, we'll be in touch.</p>
+      </form>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>Instagram</a>
+        <a href="https://www.linkedin.com/company/founderswoborders/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h6>Explore</h6>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="cape-town.html">Cape Town</a>
+      <a href="past-events.html">Past events</a>
+    </div>
+    <div>
+      <h6>Program</h6>
+      <a href="cape-town.html#overview">Why this program</a>
+      <a href="cape-town.html#experience">The experience</a>
+      <a href="cape-town.html#booking">Pricing &amp; dates</a>
+    </div>
+    <div>
+      <h6>Apply</h6>
+      <a href="https://docs.google.com/forms/d/1RbBDyjG406pyFX_9WBIF_RO6bUP3PFuYSphQYPMztSA/viewform" target="_blank" rel="noopener">Reserve your spot</a>
+      <a href="mailto:laurenne@founderswoborders.com">laurenne@founderswoborders.com</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Founders Without Borders. All rights reserved.</span>
+    <span>Limited spots available · Applications are open</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle'), l=document.querySelector('.nav-links');
+  if(t&&l){ t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open?'true':'false');
+  }); }
+})();
+</script>
+<script>
+(function(){
+  var nd=document.querySelector('.nav-drop'), nb=nd&&nd.querySelector('.nav-drop-btn');
+  if(nb){ nb.addEventListener('click',function(e){ e.stopPropagation(); var o=nd.classList.toggle('open'); nb.setAttribute('aria-expanded',o?'true':'false'); });
+    document.addEventListener('click',function(e){ if(!nd.contains(e.target)){ nd.classList.remove('open'); nb.setAttribute('aria-expanded','false'); } });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ nd.classList.remove('open'); } }); }
+})();
+</script>
+</body>
+</html>
